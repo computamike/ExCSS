@@ -20,6 +20,27 @@ namespace ExCSS
             _declarations = declarations;
         }
 
+        public override bool Equals(object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                StyleRule p = (StyleRule)obj;
+                
+                var declaresMatch =  (Declarations == p.Declarations);
+
+                // Limited comparison - should we delve depper?
+                return (Value == p.Value)
+                    && (Selector == p.Selector)
+                    && (Declarations == p.Declarations) 
+                    && (RuleType == p.RuleType);
+            }   
+        }
+
         public BaseSelector Selector
         {
             get { return _selector; }
